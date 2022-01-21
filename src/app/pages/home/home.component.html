@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex gap-4">
+        <button class="btn btn-primary" id="btn">Open Alert</button>
+
+        <button class="btn btn-secondary" id="btn" (click)="showToast()">Open Toaster</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-6">
+      <div class="" style="height: 300px;">
+        <app-map></app-map>
+      </div>
+    </div>
+    <div class="col-6">
+      <app-barchart [chartProps]="chartProps" [barContent]="barContent" [chartValueName]="'Kişi'"></app-barchart>
+    </div>
+  </div>
+</div>
+
+

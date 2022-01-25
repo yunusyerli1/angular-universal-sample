@@ -9,6 +9,8 @@ import { MapComponent } from './pages/map/map.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BarchartComponent } from './pages/barchart/barchart.component';
 import { ChartModule } from 'angular-highcharts';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ChartModule } from 'angular-highcharts';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    HttpClientModule,
+    TranslocoRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

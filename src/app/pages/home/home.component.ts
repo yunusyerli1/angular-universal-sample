@@ -1,6 +1,7 @@
 import { Component, OnInit,  Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  actLang:string;
 
   chartProps = {
     chartType: 'column',
@@ -23,19 +26,42 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
+    private translocoService: TranslocoService,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
-    if(isPlatformBrowser(this.platformId)) {
-      document.getElementById('btn').addEventListener('click', function() {
-        alert('Hello');
-      })
-    }
-
+    this. getLang();
   }
 
   showToast() {
     this.toastr.success('Mülk, ihaleye açılmıştır!', 'İşlem Başarılı');
+  }
+  showAlert() {
+    alert('Hello');
+     if(isPlatformBrowser(this.platformId)) {
+      document.querySelector('.box').setAttribute('style', 'background-color: red');
+    }
+  }
+
+  getLang() {
+    if(isPlatformBrowser(this.platformId)) {
+      localStorage.getItem('language') ? this.actLang = JSON.parse(localStorage.getItem('language')) : this.actLang = 'tr';
+      this.setLang();
+    }
+
+
+  }
+
+  setLang() {
+    if(isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('language', JSON.stringify(this.actLang));
+    }
+    this.translocoService.setActiveLang(this.actLang);
+  }
+
+  changeLang(event){
+    this.actLang= event.target.value;
+    this.setLang();
   }
 
 }

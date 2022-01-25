@@ -1,10 +1,24 @@
-<div class="container">
+<div class="container" *transloco="let t">
   <div class="row">
     <div class="col-12">
+      <div class="box">
+        <h3>{{ t('home.bannerTitle') }}</h3>
+        <p>{{ t('home.bannerSubtitle') }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
       <div class="d-flex gap-4">
-        <button class="btn btn-primary" id="btn">Open Alert</button>
+        <button class="btn btn-primary" (click)="showAlert()">Open Alert</button>
 
-        <button class="btn btn-secondary" id="btn" (click)="showToast()">Open Toaster</button>
+        <button class="btn btn-secondary"  (click)="showToast()">Open Toaster</button>
+
+        <select   class="form-select border-0 ms-4" aria-label="Default select example"  style="width: 80px;" (change)="changeLang($event)">
+          <option value="tr" selected >TR</option>
+          <option value="en">EN</option>
+        </select>
+
       </div>
     </div>
   </div>

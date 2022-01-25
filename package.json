@@ -29,6 +29,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/ng-universal": "^4.3.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@ngneat/transloco": "^2.23.5",
     "@nguniversal/express-engine": "^11.1.2",
     "angular-highcharts": "^12.0.0",
     "class-transformer": "^0.2.3",

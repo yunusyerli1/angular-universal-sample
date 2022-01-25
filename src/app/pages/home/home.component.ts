@@ -1,4 +1,4 @@
-import { Component, OnInit,  Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit,  Inject, PLATFORM_ID, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { TranslocoService } from '@ngneat/transloco';
@@ -9,6 +9,8 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('box') box: ElementRef;
 
   actLang:string;
 
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private translocoService: TranslocoService,
+    private renderer:Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
@@ -39,7 +42,9 @@ export class HomeComponent implements OnInit {
   showAlert() {
     alert('Hello');
      if(isPlatformBrowser(this.platformId)) {
-      document.querySelector('.box').setAttribute('style', 'background-color: red');
+      //document.querySelector('.box').setAttribute('style', 'background-color: red');
+     // this.renderer.setStyle(this.el.nativeElement.querySelector('.box'), 'background-color', 'red');
+      this.renderer.setStyle(this.box.nativeElement, 'background-color', 'red');
     }
   }
 
@@ -48,15 +53,14 @@ export class HomeComponent implements OnInit {
       localStorage.getItem('language') ? this.actLang = JSON.parse(localStorage.getItem('language')) : this.actLang = 'tr';
       this.setLang();
     }
-
-
   }
 
   setLang() {
     if(isPlatformBrowser(this.platformId)) {
       localStorage.setItem('language', JSON.stringify(this.actLang));
+      this.translocoService.setActiveLang(this.actLang);
     }
-    this.translocoService.setActiveLang(this.actLang);
+
   }
 
   changeLang(event){

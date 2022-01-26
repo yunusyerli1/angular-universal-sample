@@ -12,7 +12,7 @@ export class MapComponent implements AfterViewInit {
 
 
 
-  private map;
+  //private map;
   private L;
 
   constructor(
@@ -29,7 +29,7 @@ export class MapComponent implements AfterViewInit {
 
 
   private initMap(): void {
-    this.map = this.L.map('map', {
+    let map = this.L.map('map', {
       center: [ 39.8282, -98.5795 ],
       zoom: 3
     });
@@ -40,6 +40,6 @@ export class MapComponent implements AfterViewInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    tiles.addTo(this.map);
+    tiles.addTo(map);
   }
 }
